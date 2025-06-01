@@ -1,0 +1,130 @@
+<section class="py-16 bg-[#ffdeed]">
+  <!-- Apartado 1 -->
+  <div class="mt-12 text-center mb-12">
+    <a href="https://www.amazon.com/amaba-libros-Loved-Protect-Books/dp/B09TQ3WMGX" 
+      target="_blank" rel="noopener noreferrer" 
+      class="text-3xl md:text-4xl bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-8 rounded-full inline-block transition-colors shadow-md">
+      1.- Compra el libro en Amazon
+    </a>
+  </div>
+
+  <!-- Apartado 2 -->
+  <div class="container mx-auto px-4 mb-12">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#ff74ba]">2.- Regístrate</h2>
+      <p class="text-center text-gray-700 mb-6">
+        Completa el formulario con tus datos y sube el comprobante de compra:
+      </p>
+
+      <form (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label for="firstName" class="block text-sm font-medium text-gray-700">Nombre</label>
+            <input type="text" id="firstName" name="firstName" 
+              [(ngModel)]="formData.firstName" required
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#ff74ba] focus:border-[#ff74ba]" 
+              placeholder="Tu nombre" />
+          </div>
+
+          <div class="space-y-2">
+            <label for="lastName" class="block text-sm font-medium text-gray-700">Apellidos</label>
+            <input type="text" id="lastName" name="lastName" 
+              [(ngModel)]="formData.lastName" required
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#ff74ba] focus:border-[#ff74ba]" 
+              placeholder="Tus apellidos" />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+          <input type="email" id="email" name="email" 
+            [(ngModel)]="formData.email" required
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#ff74ba] focus:border-[#ff74ba]" 
+            placeholder="tu{{'@'}}email.com" />
+        </div>
+
+        <div class="space-y-2">
+          <label for="company" class="block text-sm font-medium text-gray-700">Empresa favorita</label>
+          <select id="company" name="company" 
+            [(ngModel)]="formData.company" required
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#ff74ba] focus:border-[#ff74ba]">
+            <option value="">Selecciona una empresa</option>
+            <option value="Consumo cuidado">Consumo cuidado</option>
+            <option value="Food for Joe">Food for Joe</option>
+            <option value="Natulim">Natulim</option>
+            <option value="My Vet Nutritionist">My Vet Nutritionist</option>
+            <option value="Patitas and CO">Patitas and CO</option>
+            <option value="Terra Market">Terra Market</option>
+            <option value="Tractive">Tractive</option>
+            <option value="Pets & Vets">Pets & Vets</option>
+          </select>
+        </div>
+
+        <div class="space-y-2">
+          <label for="purchaseProof" class="block text-sm font-medium text-gray-700">Justificante de compra</label>
+          <div class="flex items-center justify-center w-full">
+            <label for="purchaseProof" 
+              class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 border-gray-300 transition-colors">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500">
+                  <span class="font-semibold">Haz clic para subir</span> o arrastra y suelta
+                </p>
+                <p class="text-xs text-gray-500">PNG, JPG o PDF (Máx. 10MB)</p>
+              </div>
+              <input id="purchaseProof" name="purchaseProof" type="file" 
+                class="hidden" accept=".jpg,.jpeg,.png,.pdf" 
+                (change)="onFileSelected($event)" required />
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" 
+          [disabled]="!isFormValid() || isSubmitting"
+          [ngClass]="{'opacity-50 cursor-not-allowed': !isFormValid() || isSubmitting}"
+          class="w-full bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-4 rounded-md transition-colors">
+          <span *ngIf="!isSubmitting">Participar en el Sorteo</span>
+          <span *ngIf="isSubmitting">Enviando...</span>
+        </button>
+
+        <p class="text-xs text-gray-500 text-center mt-4">
+          Al registrarte, aceptas nuestros 
+          <a routerLink="/terminos" target="_blank" class="text-[#ff74ba] hover:underline">
+            términos y condiciones
+          </a> y nuestra 
+          <a routerLink="/privacidad" target="_blank" class="text-[#ff74ba] hover:underline">
+            política de privacidad.
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Apartado 3: ¡Ya estás dentro! -->
+  <div class="mt-12 text-center">
+    <div class="text-3xl md:text-4xl bg-[#ff74ba] text-white font-bold py-3 px-8 rounded-full inline-block transition-colors shadow-md">
+      3.- ¡Ya estás dentro!
+    </div>
+  </div>
+
+  <!-- Modal de éxito -->
+  <div *ngIf="showSuccessModal" 
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-lg max-w-md mx-4 text-center">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-800 mb-2">¡El registro se ha completado de forma purrfecta!</h3>
+      <p class="text-gray-600 mb-6">Síguenos para estar al tanto de los resultados.</p>
+      <button (click)="closeSuccessModal()" 
+        class="bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-2 px-6 rounded-md transition-colors">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</section>

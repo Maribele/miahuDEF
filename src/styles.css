@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Estilos personalizados */
+body {
+  font-family: "Rubik", sans-serif;
+}
+
+.clip-diagonal {
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+}
+
+/* Toast notification styles */
+#toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 50;
+  color: white;
+}
+
+#toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#toast.success {
+  background-color: #10b981;
+}
+
+#toast.error {
+  background-color: #ef4444;
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
