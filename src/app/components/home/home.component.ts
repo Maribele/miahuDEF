@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
     {
       id: "pets-and-vets",
       name: "Pets & Vets",
-      logo: "assets/imagenes/logos/pets-and-vets.jpg",
+      logo: "assets/imagenes/companies/pets-and-vets.jpg",
       phrase: "Servicios veterinarios y productos de salud para mascotas",
     },
   ]
