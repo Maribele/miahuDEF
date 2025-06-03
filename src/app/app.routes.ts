@@ -1,5 +1,8 @@
-import type { Routes } from "@angular/router"
-import { HomeComponent } from "./components/home/home.component"
+import { HomeComponent } from "./components/home/home.component";
+import { TerminosComponent } from "./components/terminos/terminos.component";
+import { PrivacidadComponent } from "./components/privacidad/privacidad.component";
+import { Routes } from "@angular/router";
+
 
 export const routes: Routes = [
   {
@@ -7,7 +10,15 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: "terminos",
+    component: TerminosComponent,
+  },
+  {
+    path: "privacidad",
+    component: PrivacidadComponent,
+  },
+  {
     path: "**",
     redirectTo: "",
   },
-]
+];
