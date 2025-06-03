@@ -1,6 +1,8 @@
 import { type ComponentFixture, TestBed } from "@angular/core/testing"
 import { RouterTestingModule } from "@angular/router/testing"
 import { HomeComponent } from "./home.component"
+import { VideoPlayerComponent } from "../video-player/video-player.component"
+import { By } from "@angular/platform-browser"
 
 describe("HomeComponent", () => {
   let component: HomeComponent
@@ -8,7 +10,7 @@ describe("HomeComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent, RouterTestingModule],
+      imports: [HomeComponent, RouterTestingModule, VideoPlayerComponent],
     }).compileComponents()
 
     fixture = TestBed.createComponent(HomeComponent)
@@ -20,23 +22,25 @@ describe("HomeComponent", () => {
     expect(component).toBeTruthy()
   })
 
-  it("should have companies array", () => {
-    expect(component.companies).toBeDefined()
-    expect(component.companies.length).toBeGreaterThan(0)
+  it("should have a video player component", () => {
+    const videoPlayerElement = fixture.debugElement.query(By.directive(VideoPlayerComponent))
+    expect(videoPlayerElement).toBeTruthy()
   })
 
-  it("should open modal when company is selected", () => {
-    const testCompany = component.companies[0]
-    component.openModal(testCompany)
-
-    expect(component.selectedCompany).toEqual(testCompany)
-    expect(component.showModal).toBeTruthy()
+  it("should have correct video URL", () => {
+    const videoPlayerElement = fixture.debugElement.query(By.directive(VideoPlayerComponent))
+    const videoPlayerComponent = videoPlayerElement.componentInstance
+    expect(videoPlayerComponent.videoUrl).toEqual("assets/videos/promo-gatos.mp4")
   })
 
-  it("should close modal", () => {
-    component.closeModal()
+  it("should have correct poster URL", () => {
+    const videoPlayerElement = fixture.debugElement.query(By.directive(VideoPlayerComponent))
+    const videoPlayerComponent = videoPlayerElement.componentInstance
+    expect(videoPlayerComponent.posterUrl).toEqual("assets/imagenes/video-poster.jpg")
+  })
 
-    expect(component.selectedCompany).toBeNull()
-    expect(component.showModal).toBeFalsy()
+  it("should have hero section with title", () => {
+    const titleElement = fixture.debugElement.query(By.css("h1"))
+    expect(titleElement.nativeElement.textContent).toContain("El manual purrfecto para michis & humanos")
   })
 })

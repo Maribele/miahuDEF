@@ -1,85 +1,111 @@
-import { Component, type OnInit } from "@angular/core"
+import { Component, type OnInit, signal } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { RouterModule } from "@angular/router"
+import { VideoPlayerComponent } from "../video-player/video-player.component"
+
+interface Company {
+  id: string
+  name: string
+  logo: string
+  phrase: string
+}
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, VideoPlayerComponent],
   templateUrl: "./home.component.html",
   styles: [
     `
     .clip-diagonal {
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
     }
+    
+    .modal-backdrop {
+      backdrop-filter: blur(4px);
+    }
   `,
   ],
 })
 export class HomeComponent implements OnInit {
-  companies = [
+  // Signal para controlar el modal
+  selectedCompany = signal<Company | null>(null)
+
+  // Datos de las empresas colaboradoras
+  companies: Company[] = [
     {
+      id: "consumo-cuidado",
       name: "Consumo Cuidado",
       logo: "assets/imagenes/companies/consumo-cuidado.jpg",
-      description: "Productos ecológicos para gatos y humanos.",
+      phrase: "Productos naturales y sostenibles para el cuidado de tu mascota",
     },
     {
+      id: "food-for-joe",
       name: "Food for Joe",
       logo: "assets/imagenes/companies/food-for-joe.jpg",
-      description: "Alimento natural para gatos.",
+      phrase: "Alimentación premium y natural para gatos exigentes",
     },
     {
+      id: "natulim",
       name: "Natulim",
       logo: "assets/imagenes/companies/natulim.jpg",
-      description: "Productos sostenibles para la limpieza.",
+      phrase: "Productos de limpieza naturales y seguros para mascotas",
     },
     {
+      id: "my-vet-nutritionist",
       name: "My Vet Nutritionist",
       logo: "assets/imagenes/companies/my-vet-nutritionist.jpg",
-      description: "Asesoramiento nutricional online para gatos.",
+      phrase: "Consultoría nutricional veterinaria personalizada",
     },
     {
+      id: "patitas-and-co",
       name: "Patitas and CO",
       logo: "assets/imagenes/companies/patitas-and-co.jpg",
-      description: "Alimento de la marca Milo y Lola.",
+      phrase: "Accesorios y juguetes únicos para gatos felices",
     },
     {
+      id: "terra-market",
       name: "Terra Market",
       logo: "assets/imagenes/companies/terra-market.jpg",
-      description: "Artículos naturales y zero waste para gatos y humanos.",
+      phrase: "Marketplace de productos sostenibles para mascotas",
     },
     {
+      id: "tractive",
       name: "Tractive",
       logo: "assets/imagenes/companies/tractive.jpg",
-      description: "2 localizadores GPS con suscripción anual para gatos.",
+      phrase: "Tecnología GPS para el seguimiento y seguridad de tu gato",
     },
     {
+      id: "pets-and-vets",
       name: "Pets & Vets",
-      logo: "assets/imagenes/companies/pets-and-vets.jpg",
-      description: "Consultoría en etología felina online.",
+      logo: "assets/imagenes/logos/pets-and-vets.jpg",
+      phrase: "Servicios veterinarios y productos de salud para mascotas",
     },
   ]
-
-  selectedCompany: any = null
-  showModal = false
 
   ngOnInit() {
     // Inicialización del componente
   }
 
-  playVideo() {
-    const video = document.getElementById("promo-gatos.mp4") as HTMLVideoElement
-    if (video) {
-      video.play()
+  openCompanyModal(companyId: string) {
+    const company = this.companies.find((c) => c.id === companyId)
+    if (company) {
+      this.selectedCompany.set(company)
+      // Prevenir scroll del body cuando el modal está abierto
+      document.body.style.overflow = "hidden"
     }
   }
 
-  openModal(company: any) {
-    this.selectedCompany = company
-    this.showModal = true
+  closeModal() {
+    this.selectedCompany.set(null)
+    // Restaurar scroll del body
+    document.body.style.overflow = "auto"
   }
 
-  closeModal() {
-    this.showModal = false
-    this.selectedCompany = null
+  // Cerrar modal al hacer clic en el backdrop
+  onBackdropClick(event: Event) {
+    if (event.target === event.currentTarget) {
+      this.closeModal()
+    }
   }
 }

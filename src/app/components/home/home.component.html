@@ -12,11 +12,10 @@
       <p class="text-xl md:text-2xl mb-8">¡No te lo pierdas! ¡Participa en sorteo de lanzamiento!</p>
       
       <div class="relative w-full max-w-3xl aspect-video bg-black/20 rounded-lg mb-8 flex items-center justify-center">
-        <!-- Placeholder para el video mientras no esté disponible -->
-        <video class="w-full h-full rounded-lg" controls poster="assets/imagenes/video-poster.jpg">
-          <source src="assets/videos/video-promocional.mp4" type="video/mp4">
-          Tu navegador no soporta el elemento de video.
-        </video>
+        <app-video-player 
+          videoUrl="assets/videos/promo-gatos.mp4"
+          posterUrl="assets/imagenes/video-poster.jpg">
+        </app-video-player>
       </div>
       
       <button class="bg-white text-[#ff74ba] hover:bg-white/90 transition-colors font-bold py-3 px-8 rounded-full text-lg shadow-lg">
@@ -25,6 +24,8 @@
     </div>
     
     <div class="absolute bottom-0 left-0 w-full h-16 bg-white clip-diagonal"></div>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
   </section>
   
   <!-- Intro Section -->
@@ -72,8 +73,8 @@
       </div>
     </div>
   </section>
-  
-  <!-- Book Content Section -->
+
+  <!-- Book Content Section CON IMAGEN -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#ff74ba]">Contenido del manual</h2>
@@ -81,9 +82,13 @@
         En este manual encontrarás actividades e información organizadas en 8 categorías.<br>
         Te ayudarán a dar respuesta a las necesidades de tu michi con ideas que te permitirán conocerlo mejor, cuidar su salud y hacerlo feliz.
       </p>
-      
-      <!-- Placeholder para la imagen del libro -->
-      <img src="assets/imagenes/portada-libro.jpg" alt="Portada del Manual purrfecto para michis y humanos" class="w-full max-w-3xl rounded-lg mx-auto mb-12 shadow-lg">
+
+      <!-- Imagen del libro -->
+      <div class="flex justify-center mb-12">
+        <img src="assets/imagenes/portada-libro.jpg" 
+             alt="Portada del Manual purrfecto para michis & humanos" 
+             class="max-w-md w-full h-auto rounded-lg shadow-lg">
+      </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="rounded-lg p-6 shadow-md transition-transform hover:scale-105" style="background-color: #ffdeed;">
@@ -136,7 +141,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Diferencia mi&hu Section -->
   <section class="py-12 bg-[#f7f7f7]">
     <div class="max-w-5xl mx-auto px-6">
@@ -166,8 +171,8 @@
       </div>
     </div>
   </section>
-  
-  <!-- Empresas colaboradoras -->
+
+  <!-- Empresas colaboradoras CON LOGOS -->
   <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#ff74ba]">Empresas colaboradoras</h2>
@@ -176,47 +181,73 @@
       </p>
       
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-        <div *ngFor="let company of companies" 
-          (click)="openModal(company)"
-          class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36">
-          <!-- TODOS LOS LOGOS CON TAMAÑO UNIFORME -->
-          <img [src]="company.logo" [alt]="'Logo de ' + company.name" 
-               class="object-contain"
-               [ngClass]="{
-                 'h-28 w-28': company.name === 'Terra Market' || company.name === 'My Vet Nutritionist' || company.name === 'Patitas and CO' || company.name === 'Pets & Vets',
-                 'max-h-full max-w-full': company.name !== 'Terra Market' && company.name !== 'My Vet Nutritionist' && company.name !== 'Patitas and CO' && company.name !== 'Pets & Vets'
-               }">
+        <!-- Consumo Cuidado -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('consumo-cuidado')">
+          <img src="assets/imagenes/companies/consumo-cuidado.jpg" 
+               alt="Consumo Cuidado" 
+               class="max-w-full max-h-full object-contain">
         </div>
-      </div>
-      
-      <!-- Modal para mostrar detalles de la empresa -->
-      <div *ngIf="showModal" 
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-        (click)="closeModal()">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full mx-4 relative" 
-          (click)="$event.stopPropagation()">
-          <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl" 
-            (click)="closeModal()">✖</button>
-          
-          <div class="flex flex-col items-center">
-            <!-- LOGO CON TAMAÑO UNIFORME PARA TODOS -->
-            <div class="w-full h-80 flex items-center justify-center mb-8 bg-white">
-              <img [src]="selectedCompany?.logo" [alt]="'Logo de ' + selectedCompany?.name" 
-                  class="object-contain"
-                  [ngClass]="{
-                    'h-64 w-64': selectedCompany?.name === 'Terra Market' || selectedCompany?.name === 'My Vet Nutritionist' || selectedCompany?.name === 'Patitas and CO' || selectedCompany?.name === 'Pets & Vets',
-                    'max-h-full max-w-full': selectedCompany?.name !== 'Terra Market' && selectedCompany?.name !== 'My Vet Nutritionist' && selectedCompany?.name !== 'Patitas and CO' && selectedCompany?.name !== 'Pets & Vets'
-                  }">
-            </div>
-            
-            <!-- DESCRIPCIÓN EN NEGRO MÁS GRANDE Y PROMINENTE PARA TODAS LAS EMPRESAS -->
-            <p class="text-gray-800 text-center text-2xl font-semibold leading-relaxed max-w-3xl">{{selectedCompany?.description}}</p>
-          </div>
+        
+        <!-- Food for Joe -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('food-for-joe')">
+          <img src="assets/imagenes/companies/food-for-joe.jpg" 
+               alt="Food for Joe" 
+               class="max-w-full max-h-full object-contain">
+        </div>
+        
+        <!-- Natulim -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('natulim')">
+          <img src="assets/imagenes/companies/natulim.jpg" 
+               alt="Natulim" 
+               class="max-w-full max-h-full object-contain">
+        </div>
+        
+        <!-- My Vet Nutritionist -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('my-vet-nutritionist')">
+          <img src="assets/imagenes/companies/my-vet-nutritionist.jpg" 
+               alt="My Vet Nutritionist" 
+               class="max-w-full max-h-full object-contain">
+        </div>
+        
+        <!-- Patitas and CO -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('patitas-and-co')">
+          <img src="assets/imagenes/companies/patitas-and-co.jpg" 
+               alt="Patitas and CO" 
+               class="max-w-full max-h-full object-contain">
+        </div>
+        
+        <!-- Terra Market -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('terra-market')">
+          <img src="assets/imagenes/companies/terra-market.jpg" 
+               alt="Terra Market" 
+               class="max-w-full max-h-full object-contain">
+        </div>
+        
+        <!-- Tractive -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('tractive')">
+          <img src="assets/imagenes/companies/tractive.jpg" 
+               alt="Tractive" 
+               class="max-w-full max-h-full object-contain">
+        </div>
+        
+        <!-- Pets & Vets -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('pets-and-vets')">
+          <img src="assets/imagenes/companies/pets-and-vets.jpg" 
+               alt="Pets & Vets" 
+               class="max-w-full max-h-full object-contain">
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- Pasos de participación -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
@@ -224,7 +255,7 @@
       <p class="text-center text-gray-700 mb-12 max-w-3xl mx-auto">
         ¡Es muy sencillo! Sigue estos pasos:
       </p>
-  
+
       <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8">
         <div class="bg-white border-2 border-[#ff74ba] rounded-lg p-6 flex flex-col items-center text-center max-w-xs w-full">
           <div class="mb-4 bg-[#ffdeed] p-4 rounded-full">
@@ -240,7 +271,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="bg-white border-2 border-[#ff74ba] rounded-lg p-6 flex flex-col items-center text-center max-w-xs w-full">
           <div class="mb-4 bg-[#ffdeed] p-4 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#ff74ba]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -255,100 +286,100 @@
             </div>
           </div>
         </div>
-  
+
         <div class="bg-white border-2 border-[#ff74ba] rounded-lg p-6 flex flex-col items-center text-center max-w-xs w-full">
           <div class="mb-4 bg-[#ffdeed] p-4 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#ff74ba]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-              </svg>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-[#ff74ba]">Participa</h3>
+          <p class="text-gray-700">¡Ya estás en el sorteo que se realizará el 31 de julio!</p>
+          <div class="mt-4">
+            <div class="text-3xl font-bold text-[#ff74ba] bg-[#ffdeed] rounded-full w-16 h-16 flex items-center justify-center mx-auto">
+              3
             </div>
-            <h3 class="text-xl font-bold mb-2 text-[#ff74ba]">Participa</h3>
-            <p class="text-gray-700">¡Ya estás en el sorteo que se realizará el 31 de julio!</p>
-            <div class="mt-4">
-              <div class="text-3xl font-bold text-[#ff74ba] bg-[#ffdeed] rounded-full w-16 h-16 flex items-center justify-center mx-auto">
-                3
-              </div>
-            </div>
           </div>
         </div>
       </div>
-    </section>
-  
-    <!-- Formulario de registro -->
-    <section class="py-16 bg-[#ffdeed]">
-      <!-- Apartado 1 -->
-      <div class="mt-12 text-center mb-12">
-        <a href="https://www.amazon.com/amaba-libros-Loved-Protect-Books/dp/B09TQ3WMGX" 
-          target="_blank" rel="noopener noreferrer" 
-          class="text-3xl md:text-4xl bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-8 rounded-full inline-block transition-colors shadow-md">
-          1.- Compra el libro en Amazon
-        </a>
-      </div>
-  
-      <!-- Apartado 2 -->
-      <div class="container mx-auto px-4 mb-12">
-        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
-          <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#ff74ba]">2.- Regístrate</h2>
-          <p class="text-center text-gray-700 mb-6">
-            Completa el formulario de Google con tus datos y sube el comprobante de compra:
-          </p>
-  
-          <!-- Enlace al Google Form -->
-          <div class="text-center mb-6">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_QQi26G9-3q99Zrw8u5w9k6n3yCg3gX9y_v_yY511Gg7Q/viewform" 
-              target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-4 px-8 rounded-lg transition-colors shadow-lg text-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Ir al Formulario de Registro
-            </a>
-          </div>
-  
-          <!-- Información adicional -->
-          <div class="bg-[#ffdeed] border border-[#ff74ba] rounded-lg p-4 mb-6">
-            <h4 class="font-semibold text-black mb-2">📋 Información que necesitarás:</h4>
-            <ul class="text-black text-sm space-y-1">
-              <li>• Nombre y apellidos</li>
-              <li>• Correo electrónico</li>
-              <li>• Empresa colaboradora favorita</li>
-              <li>• Justificante de compra del libro (imagen o PDF)</li>
-            </ul>
-          </div>
-  
-          <!-- Información sobre consentimientos -->
-          <div class="bg-[#ffdeed] border border-[#ff74ba] rounded-lg p-4 mb-6">
-            <h4 class="font-semibold text-black mb-2">✅ Consentimientos requeridos:</h4>
-            <ul class="text-black text-sm space-y-1">
-              <li>• Acepto que mis datos se guarden hasta la fecha del sorteo (31 de julio de 2025)</li>
-              <li>• Acepto ser contactado por correo electrónico en caso de ser ganador</li>
-            </ul>
-          </div>
-  
-          <p class="text-xs text-gray-500 text-center mt-4">
-            Al registrarte, aceptas nuestros 
-            <a routerLink="/terminos" target="_blank" class="text-[#ff74ba] hover:underline">
-              términos y condiciones
-            </a> y nuestra 
-            <a routerLink="/privacidad" target="_blank" class="text-[#ff74ba] hover:underline">
-              política de privacidad.
-            </a>
-          </p>
+    </div>
+  </section>
+
+  <!-- Formulario de registro -->
+  <section class="py-16 bg-[#ffdeed]">
+    <!-- Apartado 1 -->
+    <div class="mt-12 text-center mb-12">
+      <a href="https://www.amazon.com/amaba-libros-Loved-Protect-Books/dp/B09TQ3WMGX" 
+        target="_blank" rel="noopener noreferrer" 
+        class="text-3xl md:text-4xl bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-8 rounded-full inline-block transition-colors shadow-md">
+        1.- Compra el libro en Amazon
+      </a>
+    </div>
+
+    <!-- Apartado 2 -->
+    <div class="container mx-auto px-4 mb-12">
+      <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#ff74ba]">2.- Regístrate</h2>
+        <p class="text-center text-gray-700 mb-6">
+          Completa el formulario de Google con tus datos y sube el comprobante de compra:
+        </p>
+
+        <!-- Enlace al Google Form -->
+        <div class="text-center mb-6">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_QQi26G9-3q99Zrw8u5w9k6n3yCg3gX9y_v_yY511Gg7Q/viewform" 
+            target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-4 px-8 rounded-lg transition-colors shadow-lg text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Ir al Formulario de Registro
+          </a>
         </div>
-      </div>
-  
-      <!-- Apartado 3: ¡Ya estás dentro! -->
-      <div class="mt-12 text-center">
-        <div class="text-3xl md:text-4xl bg-[#ff74ba] text-white font-bold py-3 px-8 rounded-full inline-block transition-colors shadow-md">
-          3.- ¡Ya estás dentro!
+
+        <!-- Información adicional -->
+        <div class="bg-[#ffdeed] border border-[#ff74ba] rounded-lg p-4 mb-6">
+          <h4 class="font-semibold text-black mb-2">📋 Información que necesitarás:</h4>
+          <ul class="text-black text-sm space-y-1">
+            <li>• Nombre y apellidos</li>
+            <li>• Correo electrónico</li>
+            <li>• Empresa colaboradora favorita</li>
+            <li>• Justificante de compra del libro (imagen o PDF)</li>
+          </ul>
         </div>
+
+        <!-- Información sobre consentimientos -->
+        <div class="bg-[#ffdeed] border border-[#ff74ba] rounded-lg p-4 mb-6">
+          <h4 class="font-semibold text-black mb-2">✅ Consentimientos requeridos:</h4>
+          <ul class="text-black text-sm space-y-1">
+            <li>• Acepto que mis datos se guarden hasta la fecha del sorteo (31 de julio de 2025)</li>
+            <li>• Acepto ser contactado por correo electrónico en caso de ser ganador</li>
+          </ul>
+        </div>
+
+        <p class="text-xs text-gray-500 text-center mt-4">
+          Al registrarte, aceptas nuestros 
+          <a routerLink="/terminos" target="_blank" class="text-[#ff74ba] hover:underline">
+            términos y condiciones
+          </a> y nuestra 
+          <a routerLink="/privacidad" target="_blank" class="text-[#ff74ba] hover:underline">
+            política de privacidad.
+          </a>
+        </p>
       </div>
-    </section>
-  
-    <!-- Footer -->
+    </div>
+
+    <!-- Apartado 3: ¡Ya estás dentro! -->
+    <div class="mt-12 text-center">
+      <div class="text-3xl md:text-4xl bg-[#ff74ba] text-white font-bold py-3 px-8 rounded-full inline-block transition-colors shadow-md">
+        3.- ¡Ya estás dentro!
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="bg-gray-800 text-white py-8 relative">
     <!-- Línea inclinada superior -->
-    <div class="absolute top-0 left-0 w-full h-16 bg-[#ffdeed] clip-diagonal transform rotate-180"></div>
+    <div class="absolute top-0 left-0 w-full h-16 bg-gray-800 clip-diagonal transform rotate-180"></div>
     
     <div class="container mx-auto px-4 pt-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
@@ -387,5 +418,44 @@
       </div>
     </div>
   </footer>
+</div>
+
+<!-- Modal de empresa -->
+<div *ngIf="selectedCompany()" 
+     class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black bg-opacity-50"
+     (click)="onBackdropClick($event)">
+  <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-100">
+    <!-- Header del modal -->
+    <div class="relative bg-gradient-to-r from-[#ff74ba] to-[#ff5aab] text-white p-6 rounded-t-2xl">
+      <button (click)="closeModal()" 
+              class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      
+      <h2 class="text-2xl font-bold text-center">{{ selectedCompany()!.name }}</h2>
+    </div>
+
+    <!-- Contenido del modal -->
+    <div class="p-8 text-center">
+      <!-- Logo ampliado -->
+      <div class="mb-6">
+        <img [src]="selectedCompany()!.logo" 
+             [alt]="selectedCompany()!.name"
+             class="w-32 h-32 object-contain mx-auto rounded-lg shadow-lg">
+      </div>
+      
+      <!-- Frase descriptiva -->
+      <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+        {{ selectedCompany()!.phrase }}
+      </p>
+      
+      <!-- Botón de cerrar -->
+      <button (click)="closeModal()" 
+              class="bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+        ¡Participar en el sorteo!
+      </button>
+    </div>
   </div>
-  
+</div>

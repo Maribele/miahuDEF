@@ -1,0 +1,51 @@
+<div class="relative w-full aspect-video bg-black/20 rounded-lg flex items-center justify-center overflow-hidden">
+  <!-- Video element -->
+  <video 
+    #videoElement
+    class="w-full h-full rounded-lg"
+    [poster]="posterUrl"
+    preload="metadata"
+    (loadedmetadata)="onVideoLoaded()"
+    (play)="onVideoPlay()"
+    (pause)="onVideoPause()"
+    (ended)="onVideoEnded()">
+    <source [src]="videoUrl" type="video/mp4">
+    Tu navegador no soporta el elemento de video.
+  </video>
+
+  <!-- Overlay con botón play -->
+  @if (!isPlaying()) {
+    <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-lg cursor-pointer"
+         (click)="playVideo()">
+      <button class="play-button bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-4 transition-all duration-300 transform hover:scale-110">
+        <svg class="w-12 h-12 text-[#ff74ba]" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+  }
+
+  <!-- Controles personalizados (opcional) -->
+  @if (isPlaying()) {
+    <div class="absolute bottom-4 left-4 right-4 flex items-center space-x-4 bg-black bg-opacity-50 rounded-lg p-2">
+      <button (click)="togglePlayPause()" class="text-white hover:text-gray-300">
+        @if (isPlaying()) {
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        } @else {
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        }
+      </button>
+      
+      <div class="flex-1 bg-gray-600 rounded-full h-2">
+        <div class="bg-[#ff74ba] h-2 rounded-full transition-all duration-300" 
+             [style.width.%]="progress()"></div>
+      </div>
+      
+      <span class="text-white text-sm">{{ formatTime(currentTime()) }} / {{ formatTime(duration()) }}</span>
+    </div>
+  }
+</div>
