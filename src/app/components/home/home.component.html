@@ -35,32 +35,32 @@
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="bg-[#ffdeed] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">No entiendo el comportamiento de mi michi.</h3>
+          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">"No entiendo el comportamiento de mi michi."</h3>
           <p class="text-gray-700">Te mira fijamente, maúlla sin parar, corre o se esconde sin razón aparente. No te preocupes, entender su lenguaje secreto puede ser más fácil de lo que crees.</p>
         </div>
         
         <div class="bg-[#ffdeed] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">¿Qué alimentación es la más adecuada?</h3>
+          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">"¿Qué alimentación es la más adecuada?"</h3>
           <p class="text-gray-700">A tu michi le encantan las chuches, rechaza los alimentos de calidad y no sabes cómo ayudarlo a habituarse a los nuevos. La dieta purrfecta para tu felino no tiene por qué ser un misterio.</p>
         </div>
         
         <div class="bg-[#ffdeed] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">Mi michi se aburre y duerme demasiado.</h3>
+          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">"Mi michi se aburre y duerme demasiado."</h3>
           <p class="text-gray-700">El aburrimiento y la sobreestimulación pueden tener consecuencias negativas en la salud de tu michi. Cambia las reglas del juego y estimula todos sus sentidos sin abrumarlo.</p>
         </div>
         
         <div class="bg-[#ffdeed] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">¿Cómo puedo cuidar su salud e identificar y prevenir enfermedades?</h3>
+          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">"¿Cómo puedo cuidar su salud e identificar y prevenir enfermedades?"</h3>
           <p class="text-gray-700">Además de la vacunación, la desparasitación y las revisiones veterinarias periódicas, hay muchas iniciativas con las que puedes ayudar a tu michi a mantener un buen estado de salud.</p>
         </div>
         
         <div class="bg-[#ffdeed] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">La eliminación inapropiada dificulta nuestra convivencia.</h3>
+          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">"La eliminación inapropiada dificulta nuestra convivencia."</h3>
           <p class="text-gray-700">Los hábitos de eliminación de tu michi son un indicador de su estado de salud física y mental. Si consideras que son inadecuados, puede que tu michi tenga un problema y que necesite ayuda.</p>
         </div>
         
         <div class="bg-[#ffdeed] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">Quiero mejorar la relación con mi michi y nuestro bienestar.</h3>
+          <h3 class="text-xl font-bold mb-3 text-[#ff74ba]">"Quiero mejorar la relación con mi michi y nuestro bienestar."</h3>
           <p class="text-gray-700">Tu michi tiene una vida plena pero sientes que puedes hacer más por él y por vuestra relación. Si crees que vuestra conexión necesita un empujón, aquí encontrarás ideas que os ayudarán.</p>
         </div>
         
@@ -183,9 +183,9 @@
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
         <!-- Consumo Cuidado -->
         <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
-             (click)="openCompanyModal('consumo-cuidado')">
-          <img src="assets/imagenes/companies/consumo-cuidado.jpg" 
-               alt="Consumo Cuidado" 
+             (click)="openCompanyModal('---')">
+          <img src="" 
+               alt="---" 
                class="max-w-full max-h-full object-contain">
         </div>
         
@@ -197,30 +197,39 @@
                class="max-w-full max-h-full object-contain">
         </div>
         
+ <!-- My Vet Nutritionist -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('my-vet-nutritionist')">
+          <img src="assets/imagenes/companies/my-vet-nutritionist.jpg" 
+               alt="My Vet Nutritionist" 
+               class="object-contain max-h-70 max-w-70">
+        </div>
+
         <!-- Natulim -->
         <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
              (click)="openCompanyModal('natulim')">
           <img src="assets/imagenes/companies/natulim.jpg" 
                alt="Natulim" 
-               class="max-w-full max-h-full object-contain">
+               class="object-contain max-h-60 max-w-60">
         </div>
         
-        <!-- My Vet Nutritionist -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
-             (click)="openCompanyModal('my-vet-nutritionist')">
-          <img src="assets/imagenes/companies/my-vet-nutritionist.jpg" 
-               alt="My Vet Nutritionist" 
-               class="max-w-full max-h-full object-contain">
-        </div>
-        
+      
         <!-- Patitas and CO -->
         <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
              (click)="openCompanyModal('patitas-and-co')">
           <img src="assets/imagenes/companies/patitas-and-co.jpg" 
                alt="Patitas and CO" 
-               class="max-w-full max-h-full object-contain">
+               class="object-contain max-h-70 max-w-70">
         </div>
         
+        <!-- Pets & Vets -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
+             (click)="openCompanyModal('pets-and-vets')">
+          <img src="assets/imagenes/companies/pets-and-vets.jpg" 
+               alt="Pets & Vets" 
+               class="object-contain max-h-70 max-w-70">
+        </div>
+
         <!-- Terra Market -->
         <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
              (click)="openCompanyModal('terra-market')">
@@ -237,13 +246,7 @@
                class="max-w-full max-h-full object-contain">
         </div>
         
-        <!-- Pets & Vets -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:scale-105 flex items-center justify-center h-36"
-             (click)="openCompanyModal('pets-and-vets')">
-          <img src="assets/imagenes/companies/pets-and-vets.jpg" 
-               alt="Pets & Vets" 
-               class="max-w-full max-h-full object-contain">
-        </div>
+
       </div>
     </div>
   </section>
@@ -424,6 +427,7 @@
 <div *ngIf="selectedCompany()" 
      class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black bg-opacity-50"
      (click)="onBackdropClick($event)">
+     
   <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-100">
     <!-- Header del modal -->
     <div class="relative bg-gradient-to-r from-[#ff74ba] to-[#ff5aab] text-white p-6 rounded-t-2xl">
@@ -438,24 +442,31 @@
     </div>
 
     <!-- Contenido del modal -->
-    <div class="p-8 text-center">
-      <!-- Logo ampliado -->
-      <div class="mb-6">
-        <img [src]="selectedCompany()!.logo" 
-             [alt]="selectedCompany()!.name"
-             class="w-32 h-32 object-contain mx-auto rounded-lg shadow-lg">
-      </div>
-      
-      <!-- Frase descriptiva -->
-      <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-        {{ selectedCompany()!.phrase }}
-      </p>
-      
-      <!-- Botón de cerrar -->
-      <button (click)="closeModal()" 
-              class="bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
-        ¡Participar en el sorteo!
-      </button>
-    </div>
+  <div class="p-8 text-center min-h-[350px] flex flex-col items-center justify-center">
+  <!-- Logo ampliado -->
+  <div class="mb-6 flex items-center justify-center w-60 h-60 mx-auto">
+    <img [src]="selectedCompany()!.logo" 
+         [alt]="selectedCompany()!.name"
+         [ngClass]="{
+           'scale-120': selectedCompany()!.id === 'my-vet-nutritionist',
+           'scale-150': selectedCompany()!.id === 'natulim',
+           'scale-105': selectedCompany()!.id === 'patitas-and-co',
+           'scale-125': selectedCompany()!.id === 'terra-market',
+           'scale-95': selectedCompany()!.id === 'pets-and-vets',
+           'scale-100': selectedCompany()!.id === 'food-for-joe',
+           'scale-110': selectedCompany()!.id === 'tractive',
+         }"
+         class="object-contain max-w-full max-h-full mx-auto rounded-lg shadow-lg transition-transform duration-300">
+  </div>
+  <!-- Frase descriptiva -->
+  <p class="text-2xl font-bold text-gray-800 mb-10 leading-relaxed">
+    {{ selectedCompany()!.phrase }}
+  </p>
+  <!-- Botón de cerrar -->
+  <button (click)="closeModal()" 
+          class="bg-[#ff74ba] hover:bg-[#ff5aab] text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+   Volver al sorteo
+  </button>
+</div>
   </div>
 </div>

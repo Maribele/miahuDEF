@@ -34,34 +34,34 @@ export class HomeComponent implements OnInit {
   // Datos de las empresas colaboradoras
   companies: Company[] = [
     {
-      id: "consumo-cuidado",
+      id: "---",
       name: "Consumo Cuidado",
-      logo: "assets/imagenes/companies/consumo-cuidado.jpg",
-      phrase: "Productos naturales y sostenibles para el cuidado de tu mascota",
+      logo: "",
+      phrase: "",
     },
     {
       id: "food-for-joe",
       name: "Food for Joe",
       logo: "assets/imagenes/companies/food-for-joe.jpg",
-      phrase: "Alimentación premium y natural para gatos exigentes",
+      phrase: "Alimentos naturales para michis",
     },
     {
       id: "natulim",
       name: "Natulim",
       logo: "assets/imagenes/companies/natulim.jpg",
-      phrase: "Productos de limpieza naturales y seguros para mascotas",
+      phrase: "Tierra de Sommieres (limpiador de pipí y vómitos), detergente y fregasuelos.",
     },
     {
       id: "my-vet-nutritionist",
       name: "My Vet Nutritionist",
       logo: "assets/imagenes/companies/my-vet-nutritionist.jpg",
-      phrase: "Consultoría nutricional veterinaria personalizada",
+      phrase: "Asesoría de nutrición especializada con Sara Martín",
     },
     {
       id: "patitas-and-co",
       name: "Patitas and CO",
       logo: "assets/imagenes/companies/patitas-and-co.jpg",
-      phrase: "Accesorios y juguetes únicos para gatos felices",
+      phrase: "10 latas de milo y lola",
     },
     {
       id: "terra-market",
@@ -73,13 +73,13 @@ export class HomeComponent implements OnInit {
       id: "tractive",
       name: "Tractive",
       logo: "assets/imagenes/companies/tractive.jpg",
-      phrase: "Tecnología GPS para el seguimiento y seguridad de tu gato",
+      phrase: "2 GPS con suscripción para un año",
     },
     {
       id: "pets-and-vets",
       name: "Pets & Vets",
       logo: "assets/imagenes/companies/pets-and-vets.jpg",
-      phrase: "Servicios veterinarios y productos de salud para mascotas",
+      phrase: "Consulta de etología felina con Ana Ballester",
     },
   ]
 
