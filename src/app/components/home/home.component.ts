@@ -1,13 +1,13 @@
-import { Component, type OnInit, signal } from "@angular/core"
-import { CommonModule } from "@angular/common"
-import { RouterModule } from "@angular/router"
-import { VideoPlayerComponent } from "../video-player/video-player.component"
+import { Component, type OnInit, signal } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { VideoPlayerComponent } from "../video-player/video-player.component";
 
 interface Company {
-  id: string
-  name: string
-  logo: string
-  phrase: string
+  id: string;
+  name: string;
+  logo: string;
+  phrase: string;
 }
 
 @Component({
@@ -17,27 +17,25 @@ interface Company {
   templateUrl: "./home.component.html",
   styles: [
     `
-    .clip-diagonal {
-      clip-path: polygon(0 100%, 100% 100%, 100% 0);
-    }
-    
-    .modal-backdrop {
-      backdrop-filter: blur(4px);
-    }
-  `,
+      .clip-diagonal {
+        clip-path: polygon(0 100%, 100% 100%, 100% 0);
+      }
+
+      .modal-backdrop {
+        backdrop-filter: blur(4px);
+      }
+    `,
   ],
 })
 export class HomeComponent implements OnInit {
-  // Signal para controlar el modal
-  selectedCompany = signal<Company | null>(null)
+  selectedCompany = signal<Company | null>(null);
 
-  // Datos de las empresas colaboradoras
   companies: Company[] = [
     {
-      id: "---",
-      name: "Consumo Cuidado",
-      logo: "",
-      phrase: "",
+      id: "antrozoologia",
+      name: "Antrozoologia",
+      logo: "assets/imagenes/companies/antrozoologia.jpg",
+      phrase: "Curso: Conociendo a tu gato",
     },
     {
       id: "food-for-joe",
@@ -55,7 +53,7 @@ export class HomeComponent implements OnInit {
       id: "my-vet-nutritionist",
       name: "My Vet Nutritionist",
       logo: "assets/imagenes/companies/my-vet-nutritionist.jpg",
-      phrase: "Asesoría de nutrición especializada con Sara Martín",
+      phrase: "Asesoría con la veterinaria Sara Martín, experta en nutrición",
     },
     {
       id: "patitas-and-co",
@@ -67,7 +65,7 @@ export class HomeComponent implements OnInit {
       id: "terra-market",
       name: "Terra Market",
       logo: "assets/imagenes/companies/terra-market.jpg",
-      phrase: "Marketplace de productos sostenibles para mascotas",
+      phrase: "Nueces de lavado, bayetas de celulosa, algas nori y aceite esencial de lavanda",
     },
     {
       id: "tractive",
@@ -79,33 +77,49 @@ export class HomeComponent implements OnInit {
       id: "pets-and-vets",
       name: "Pets & Vets",
       logo: "assets/imagenes/companies/pets-and-vets.jpg",
-      phrase: "Consulta de etología felina con Ana Ballester",
+      phrase: "Consulta con la etóloga felina Ana Ballester",
     },
-  ]
+  ];
 
   ngOnInit() {
-    // Inicialización del componente
+    // Inicialización si necesitas
   }
 
   openCompanyModal(companyId: string) {
-    const company = this.companies.find((c) => c.id === companyId)
+    const company = this.companies.find((c) => c.id === companyId);
     if (company) {
-      this.selectedCompany.set(company)
-      // Prevenir scroll del body cuando el modal está abierto
-      document.body.style.overflow = "hidden"
+      this.selectedCompany.set(company);
+      document.body.style.overflow = "hidden"; // Bloquear scroll
     }
   }
 
   closeModal() {
-    this.selectedCompany.set(null)
-    // Restaurar scroll del body
-    document.body.style.overflow = "auto"
+    this.selectedCompany.set(null);
+    document.body.style.overflow = "auto"; // Restaurar scroll
   }
 
-  // Cerrar modal al hacer clic en el backdrop
   onBackdropClick(event: Event) {
     if (event.target === event.currentTarget) {
-      this.closeModal()
+      this.closeModal();
+    }
+  }
+
+  // Método para asignar clases CSS dinámicamente a la imagen ampliada del modal
+  getScaleClass(companyId: string): string {
+    // Ejemplo simple, puedes ajustar estilos específicos por empresa si quieres
+    switch (companyId) {
+      case "food-for-joe":
+      case "terra-market":
+      case "tractive":
+        return "scale-100";
+      case "natulim":
+        return "scale-90";
+      case "my-vet-nutritionist":
+      case "patitas-and-co":
+      case "pets-and-vets":
+        return "scale-95";
+      default:
+        return "scale-100";
     }
   }
 }
