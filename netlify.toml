@@ -1,6 +1,6 @@
 [build]
   command = "ng build --configuration production"
-  publish = "dist/miahu-sorteo/browser"
+  publish = "dist/miahu-sorteo"
 
 [build.environment]
   NODE_VERSION = "18"
