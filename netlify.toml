@@ -3,7 +3,7 @@
   publish = "dist/miahu-sorteo"
 
 [build.environment]
-  NODE_VERSION = "20.11"
+  NODE_VERSION = "20.19"
 
 [[redirects]]
   from = "/*"
